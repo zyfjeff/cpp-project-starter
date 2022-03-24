@@ -14,7 +14,9 @@ class BigObject {
 
 BigObject foo(int n) {
   BigObject localObj;
-  return std::move(localObj);
+#pragma clang diagnostic ignored "-Wpessimizing-move"
+  // warning: moving a local object in a return statement prevents copy elision [-Wpessimizing-move]
+  return std::move(localObj); // remove std::move call here
 }
 
 BigObject foo2(int n) { return BigObject(); }
@@ -42,19 +44,19 @@ TEST(Opt, RVO) {
       destructor.
       destructor.
   */
-  auto f = foo(1);
+  //auto f = foo(1);
 
   /*
       constructor.
       destructor.
   */
-  auto f2 = foo2(1);
+  //auto f2 = foo2(1);
 
   /*
       constructor.
       destructor.
   */
-  auto f3 = foo3(1);
+  //auto f3 = foo3(1);
 
   // RVO失效
   /*
@@ -65,9 +67,10 @@ TEST(Opt, RVO) {
    destructor.
    destructor.
   */
-  auto f4 = foo4(1);
+  //auto f4 = foo4(1);
 
   /*
+   bazel test -c opt --cxxopt="-fno-elide-constructors" //example/basic:rvo --test_output=all 
    // 禁用RVO
    constructor.
    move constructor
