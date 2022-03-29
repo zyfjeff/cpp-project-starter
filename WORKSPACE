@@ -1,11 +1,11 @@
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
 
-http_archive(
-  name = "com_google_absl",
-  urls = ["https://github.com/abseil/abseil-cpp/archive/9f5b2c782ad50df4692bc66f1687e1f4d43c7308.zip"],
-  strip_prefix = "abseil-cpp-9f5b2c782ad50df4692bc66f1687e1f4d43c7308",
+git_repository(
+    name = "com_google_absl",
+    remote = "https://github.com/abseil/abseil-cpp.git",
+    tag = "20211102.0",
 )
-
 
 http_archive(
   name = "com_google_tcmalloc",
@@ -38,6 +38,17 @@ http_archive(
     urls = ["https://github.com/rules-proto-grpc/rules_proto_grpc/archive/4.1.1.tar.gz"],
 )
 
+# Rule repository, note that it's recommended to use a pinned commit to a released version of the rules
+http_archive(
+   name = "rules_foreign_cc",
+   sha256 = "30c970bfaeda3485100c62b13093da2be2c70ed99ec8d30f4fac6dd37cb25f34",
+   strip_prefix = "rules_foreign_cc-0.6.0",
+   url = "https://github.com/bazelbuild/rules_foreign_cc/archive/0.6.0.zip",
+)
+
+load("@rules_foreign_cc//foreign_cc:repositories.bzl", "rules_foreign_cc_dependencies")
+rules_foreign_cc_dependencies()
+
 load("@rules_proto_grpc//:repositories.bzl", "rules_proto_grpc_toolchains", "rules_proto_grpc_repos")
 rules_proto_grpc_toolchains()
 rules_proto_grpc_repos()
@@ -52,3 +63,23 @@ rules_proto_grpc_cpp_repos()
 
 load("@com_grail_bazel_compdb//:deps.bzl", "bazel_compdb_deps")
 bazel_compdb_deps()
+
+http_archive(
+    name = "com_github_uvw",
+    build_file = "@//bazel:uvw.BUILD",
+    strip_prefix = "uvw-2.12.1_libuv_v1.44",
+    urls = [
+        "https://github.com/skypjack/uvw/archive/refs/tags/v2.12.1_libuv_v1.44.tar.gz",
+    ],
+    sha256 = "3460842778e91e7d2fae4201e49e4521e9d94fbbf3891ae6c52d3c9fc0673598",
+)
+
+http_archive(
+    name = "com_github_libuv",
+    build_file = "@//bazel:libuv.BUILD",
+    strip_prefix = "libuv-1.44.1",
+    urls = [
+        "https://github.com/libuv/libuv/archive/refs/tags/v1.44.1.tar.gz",
+    ],
+    sha256 = "e91614e6dc2dd0bfdd140ceace49438882206b7a6fb00b8750914e67a9ed6d6b",
+)
