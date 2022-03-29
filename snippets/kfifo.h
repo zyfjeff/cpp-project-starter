@@ -1,6 +1,7 @@
 #pragma once
 
 #include <array>
+#include <cstring>
 
 # define barrier() __asm__ __volatile__("": : :"memory")
 

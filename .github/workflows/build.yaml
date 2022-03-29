@@ -13,5 +13,5 @@ jobs:
       - name: Build
         run: bazelisk build //...
 
-      - name: Test
-        run: bazelisk test //...
+      - name: Test and Asan
+        run: bazelisk test //... --config=asan

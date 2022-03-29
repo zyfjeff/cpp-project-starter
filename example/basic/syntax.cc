@@ -23,7 +23,8 @@ TEST(Ref, Dangling) {
   data.push_back("fourth");
   data.push_back("fifth");
   data.push_back("sixth");
-  std::cout << first << std::endl;
+  // Dangling ref
+  // std::cout << first << std::endl;
 }
 
 TEST(Syntax, basic) {

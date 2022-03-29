@@ -39,3 +39,12 @@ TEST(uvw, basic) {
   conn(*loop);
   loop->run();
 }
+
+TEST(uvw, asan_error) {
+  auto loop = uvw::Loop::create();
+  auto timer = loop->resource<uvw::TimerHandle>();
+  timer->on<uvw::TimerEvent>([](uvw::TimerEvent&, uvw::TimerHandle&) {});
+  timer->start(uvw::TimerHandle::Time(0), uvw::TimerHandle::Time(1000));
+  timer->close();
+  loop->close();
+}
