@@ -15,9 +15,10 @@ TEST(Kfifo, basic) {
 }
 
 TEST(Kfifo, in) {
-  Kfifo<int, 1024> fifo;
+  const uint16_t default_size = 1024;
+  Kfifo<int, default_size> fifo;
   int count = 0;
-  while(count < 1024) {
+  while(count < default_size) {
     EXPECT_EQ(1, fifo.In(&count, 1));
     count++;
   }
@@ -26,10 +27,10 @@ TEST(Kfifo, in) {
 
   count = 0;
   int expect_count = 0;
-  while(count < 1024) {
+  while(count < default_size) {
     fifo.Out(&expect_count, 1);
     EXPECT_EQ(expect_count, count);
     count++;
   }
-  EXPECT_EQ(1024, fifo.Unused());
+  EXPECT_EQ(default_size, fifo.Unused());
 }

@@ -46,7 +46,6 @@ class Kfifo {
   size_t Unused() {
 	return (mask_ + 1) - (in_ - out_);
   }
-  ~Kfifo() = default;
 
  private:
   void CopyIn(const T* src, size_t len, size_t off) {
@@ -75,7 +74,7 @@ class Kfifo {
 	  off *= esize_;
 	}
 	size_t l = std::min(len, size - off);
-	memcpy(dst, reinterpret_cast<char*>(data_.data()) + off, l);
+	memcpy(dst, (reinterpret_cast<char*>(data_.data())) + off, l);
 	memcpy(reinterpret_cast<char*>(dst) + l, data_.data(), len - l);
 	// 写屏障，不能让out_的写入在之前发生
 	barrier();
