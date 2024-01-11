@@ -1,13 +1,7 @@
-load("@rules_proto_grpc//cpp:defs.bzl", "cpp_proto_compile")
+load("@rules_proto//proto:defs.bzl", "proto_library")
 
 proto_library(
     name = "thing_proto",
     srcs = ["thing.proto"],
-    deps = ["@com_google_protobuf//:any_proto"],
+    deps = ["@protobuf//:any_proto"],
 )
-
-cpp_proto_compile(
-    name = "cpp_thing_proto",
-    protos = [":thing_proto"],
-)
-

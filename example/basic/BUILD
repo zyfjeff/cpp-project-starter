@@ -3,7 +3,7 @@ cc_test(
   size = "small",
   srcs = ["syntax.cc"],
   deps = [
-      "@com_google_googletest//:gtest_main",
+      "@googletest//:gtest_main",
     ],
 )
 
@@ -12,7 +12,7 @@ cc_test(
   size = "small",
   srcs = ["rvo.cc"],
   deps = [
-      "@com_google_googletest//:gtest_main",
+      "@googletest//:gtest_main",
     ],
 )
 
@@ -22,7 +22,7 @@ cc_test(
   srcs = ["template.cc"],
   deps = [
       "//example/common:type_name",
-      "@com_google_googletest//:gtest_main",
+      "@googletest//:gtest_main",
     ],
 )
 
@@ -31,6 +31,6 @@ cc_test(
   size = "small",
   srcs = ["lambda.cc"],
   deps = [
-      "@com_google_googletest//:gtest_main",
+      "@googletest//:gtest_main",
     ],
 )
