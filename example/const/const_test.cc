@@ -16,7 +16,7 @@ TEST(pointer, basic) {
   char* const d = data;
   EXPECT_EQ(d, data);
   d[2] = '3';
-  char another_data[] = "world";
+  // char another_data[] = "world";
   // cannot assign to variable 'd' with const-qualified type 'char *const'
   // d  = another_data;
 
