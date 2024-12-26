@@ -1,6 +1,8 @@
 build --cxxopt='-std=c++20'
-build --action_env=CC=clang
-build --action_env=CXX=clang++
+#build --action_env=BAZEL_CXXOPTS=-stdlib=libc++
+#build --action_env=BAZEL_LINKLIBS=-lc++:-lc++abi:-lm
+#build --action_env=CC=clang
+#build --action_env=CXX=clang++
 
 # Address sanitizer configuration.
 # ASAN_SYMBOLIZER_PATH=/usr/local/Cellar/llvm/13.0.1_1/bin/llvm-symbolizer
