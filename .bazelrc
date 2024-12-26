@@ -9,6 +9,8 @@ build --cxxopt='-std=c++20'
 
 # Address sanitizer config
 # Use with bazel run --config=asan or lsan
+build:asan --action_env=CC=clang
+build:asan --action_env=CXX=clang++
 build:asan --strip=never
 build:asan --copt -fsanitize=address
 build:asan --copt -DADDRESS_SANITIZER
