@@ -10,8 +10,14 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Build
+      - name: Build example
         run: bazelisk build //example/...
+      
+      - name: Build snippets
+        run: bazelisk build //snippets/...
 
       - name: Test and Asan
         run: bazelisk test //... --config=asan
+      
+      - name: Generate compile_commannds.json
+        run: bazelisk run :refresh_compile_commands
