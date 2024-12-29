@@ -8,5 +8,6 @@ refresh_compile_commands(
     targets = {
         "//example/...": "",
         "//snippets/...": "",
+        "//tutorial/...": "",
     },
 )
